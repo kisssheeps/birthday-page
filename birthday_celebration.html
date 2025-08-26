@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+            font-weight: bold;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 60%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            80% { transform: translateY(-15px); }
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .birthday-cake {
+            font-size: 6rem;
+            animation: rotate 4s linear infinite;
+            margin: 30px 0;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .balloons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .balloon:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; color: #ff6b6b; }
+        .balloon:nth-child(2) { left: 80%; top: 15%; animation-delay: 0.5s; color: #4ecdc4; }
+        .balloon:nth-child(3) { left: 15%; top: 70%; animation-delay: 1s; color: #45b7d1; }
+        .balloon:nth-child(4) { left: 85%; top: 75%; animation-delay: 1.5s; color: #96ceb4; }
+        .balloon:nth-child(5) { left: 50%; top: 10%; animation-delay: 2s; color: #ffeaa7; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: fall 3s linear infinite;
+        }
+
+        .confetti:nth-child(odd) { background: #4ecdc4; animation-delay: 0.5s; }
+        .confetti:nth-child(3n) { background: #45b7d1; animation-delay: 1s; }
+        .confetti:nth-child(4n) { background: #96ceb4; animation-delay: 1.5s; }
+        .confetti:nth-child(5n) { background: #ffeaa7; animation-delay: 2s; }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .wish-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .wish-button:hover {
+            transform: scale(1.05);
+        }
+
+        .fireworks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: explode 2s ease-out infinite;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5rem; }
+            .subtitle { font-size: 1.3rem; }
+            .birthday-cake { font-size: 4rem; }
+            .balloon { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="balloons">
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+    </div>
+
+    <div class="fireworks" id="fireworks"></div>
+
+    <div class="container">
+        <h1 class="main-title">🎉 生日快乐 🎉</h1>
+        <p class="subtitle">Happy Birthday!</p>
+        <div class="birthday-cake">🎂</div>
+        <button class="wish-button" onclick="showWishes()">点击许愿 ✨</button>
+        <div id="wishes" style="margin-top: 20px; color: white; font-size: 1.2rem;"></div>
+    </div>
+
+    <script>
+        // 创建飘落的彩带
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // 创建烟花效果
+        function createFireworks() {
+            const fireworksContainer = document.getElementById('fireworks');
+            for (let i = 0; i < 20; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * 100 + '%';
+                firework.style.top = Math.random() * 100 + '%';
+                firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                firework.style.animationDelay = Math.random() * 2 + 's';
+                fireworksContainer.appendChild(firework);
+            }
+        }
+
+        // 显示祝福语
+        function showWishes() {
+            const wishes = [
+                '🎈 愿你的每一天都充满快乐！',
+                '🌟 祝你心想事成，万事如意！',
+                '🎂 愿你永远年轻，永远快乐！',
+                '🎁 祝你生日快乐，天天开心！',
+                '🌈 愿你的未来充满阳光和希望！'
+            ];
+            
+            const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+            document.getElementById('wishes').innerHTML = randomWish;
+            
+            // 添加更多烟花
+            createFireworks();
+        }
+
+        // 页面加载时创建特效
+        window.onload = function() {
+            createConfetti();
+            createFireworks();
+            
+            // 播放生日歌（如果需要的话）
+            // 注意：自动播放音频在移动端可能被限制
+        };
+
+        // 点击屏幕创建更多特效
+        document.addEventListener('click', function(e) {
+            if (e.target.className !== 'wish-button') {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = e.clientX + 'px';
+                firework.style.top = e.clientY + 'px';
+                firework.style.position = 'fixed';
+                firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                document.body.appendChild(firework);
+                
+                setTimeout(() => {
+                    firework.remove();
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
